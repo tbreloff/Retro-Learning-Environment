@@ -21,7 +21,7 @@ rle.setInt('random_seed', 123)
 # Set USE_SDL to true to display the screen. RLE must be compilied
 # with SDL enabled for this to work. On OSX, pygame init is used to
 # proxy-call SDL_main.
-USE_SDL = False
+USE_SDL = True
 if USE_SDL:
   if sys.platform == 'darwin':
     import pygame
