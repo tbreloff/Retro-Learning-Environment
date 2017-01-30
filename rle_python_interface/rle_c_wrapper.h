@@ -40,6 +40,7 @@ extern "C" {
   int lives(RLEInterface *rle){return rle->lives();}
   int getEpisodeFrameNumber(RLEInterface *rle){return rle->getEpisodeFrameNumber();}
   void getRAM(RLEInterface *rle, unsigned char *ram);
+  void setRAM(RLEInterface *rle, size_t offset, byte_t val);
   int getRAMSize(RLEInterface *rle){return rle->getRAM().size();}
   int getScreenWidth(RLEInterface *rle){return rle->getScreen().width();}
   int getScreenHeight(RLEInterface *rle){return rle->getScreen().height();}

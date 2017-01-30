@@ -72,3 +72,7 @@ void getRAM(RLEInterface *rle,unsigned char *ram){
   int size = rle->getRAM().size();
   memcpy(ram, rle_ram, size*sizeof(unsigned char));
 }
+
+void setRAM(RLEInterface *rle, size_t offset, byte_t val){
+    rle->setRAM(offset, val);
+}

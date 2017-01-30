@@ -15,9 +15,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * *****************************************************************************
  * A.L.E (Arcade Learning Environment)
- * Copyright (c) 2009-2013 by Yavar Naddaf, Joel Veness, Marc G. Bellemare and 
+ * Copyright (c) 2009-2013 by Yavar Naddaf, Joel Veness, Marc G. Bellemare and
  *   the Reinforcement Learning and Artificial Intelligence Laboratory
- * Released under the GNU General Public License; see License.txt for details. 
+ * Released under the GNU General Public License; see License.txt for details.
  *
  * Based on: Stella  --  "An Atari 2600 VCS Emulator"
  * Copyright (c) 1995-2007 by Bradford W. Mott and the Stella team
@@ -108,6 +108,8 @@ public:
 
 	  // Returns the current RAM content
 	  const RLERAM &getRAM() const;
+
+      void setRAM(size_t offset, byte_t val);
 
 	  // Saves the state of the system
 	  void saveState();
@@ -484,6 +486,15 @@ const RLERAM& RLEInterface::Impl::getRAM() const{
   return environment->getRAM();
 }
 
+void RLEInterface::setRAM(size_t offset, byte_t val) {
+  return m_pimpl->setRAM(offset, val);
+}
+
+void RLEInterface::Impl::setRAM(size_t offset, byte_t val) {
+    const RLERAM& ram = getRAM();
+    ram.array()[offset] = val;
+}
+
 void RLEInterface::saveState() {
 	m_pimpl->saveState();
 }
@@ -539,7 +550,7 @@ void RLEInterface::saveScreenPNG(const string& filename) {
 }
 
 void RLEInterface::Impl::saveScreenPNG(const string& filename) {
-  
+
 //  ScreenExporter exporter(theRleSystem->colourPrlette());
 //  exporter.save(environment->getScreen(), filename);
 }

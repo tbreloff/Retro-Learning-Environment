@@ -55,6 +55,8 @@ rle_lib.getEpisodeFrameNumber.argtypes = [c_void_p]
 rle_lib.getEpisodeFrameNumber.restype = c_int
 rle_lib.getRAM.argtypes = [c_void_p, c_void_p]
 rle_lib.getRAM.restype = None
+rle_lib.setRAM.argtypes = [c_void_p, c_int, c_char]
+rle_lib.setRAM.restype = None
 rle_lib.getRAMSize.argtypes = [c_void_p]
 rle_lib.getRAMSize.restype = c_int
 rle_lib.getScreenWidth.argtypes = [c_void_p]
@@ -197,6 +199,9 @@ class RLEInterface(object):
             ram = np.zeros(ram_size, dtype=np.uint8)
         rle_lib.getRAM(self.obj, as_ctypes(ram))
         return ram
+
+    def setRAM(self, offset, val):
+        rle_lib.setRAM(self.obj, offset, val)
 
 #    def saveScreenPNG(self, filename):
 #        """Save the current screen as a png file"""
