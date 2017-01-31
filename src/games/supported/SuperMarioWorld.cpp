@@ -81,6 +81,10 @@ void SuperMarioWorldSettings::step(const RleSystem& system) {
     	if ( (0 < time && time < 300) && (std::adjacent_find( m_lastTime.begin(), m_lastTime.end(), std::not_equal_to<int>() ) == m_lastTime.end()) ){
     	    m_terminal=true;
     	}
+
+        // game over when fading to overworld. see: http://www.smwiki.net/wiki/RAM_Address/$7E:0100
+        if (readRam(&system, 0x100) == 0x0B)
+            m_terminal=true;
     }
 }
 
@@ -145,14 +149,13 @@ ActionVect SuperMarioWorldSettings::getStartingActions(){
 	for(i = 0; i<1.5*num_of_nops; i++){
 		startingActions.push_back(JOYPAD_NOOP);
 	}
-	// start level
-	startingActions.push_back(JOYPAD_B);
-	// wait for level to load
-	startingActions.push_back(JOYPAD_LEFT);
-	for(i = 0; i<2*num_of_nops; i++){
-		startingActions.push_back(JOYPAD_NOOP);
-	}
+	// // start level
+	// startingActions.push_back(JOYPAD_B);
+	// // wait for level to load
+	// startingActions.push_back(JOYPAD_LEFT);
+	// for(i = 0; i<2*num_of_nops; i++){
+	// 	startingActions.push_back(JOYPAD_NOOP);
+	// }
 
 	return startingActions;
 }
-
